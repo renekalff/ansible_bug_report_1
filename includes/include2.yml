@@ -1,0 +1,4 @@
+---
+
+- fail: msg="failure in include"
+  when: ansible_hostname == 'host2'

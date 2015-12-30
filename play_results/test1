@@ -1,0 +1,58 @@
+$ ansible-playbook -i hosts test1.yml
+
+PLAY ***************************************************************************
+
+TASK [setup] *******************************************************************
+ok: [host1]
+ok: [host2]
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "start of test 1"
+}
+ok: [host2] => {
+    "msg": "start of test 1"
+}
+
+TASK [fail] ********************************************************************
+skipping: [host1]
+skipping: [host2]
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "first debug message"
+}
+ok: [host2] => {
+    "msg": "first debug message"
+}
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "second debug message"
+}
+ok: [host2] => {
+    "msg": "second debug message"
+}
+
+TASK [include] *****************************************************************
+included: /Users/rkalff/Projects/TestAnsible/test/includes/include1.yml for host1, host2
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "include 1"
+}
+ok: [host2] => {
+    "msg": "include 1"
+}
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "final debug message"
+}
+ok: [host2] => {
+    "msg": "final debug message"
+}
+
+PLAY RECAP *********************************************************************
+host1                      : ok=7    changed=0    unreachable=0    failed=0
+host2                      : ok=7    changed=0    unreachable=0    failed=0

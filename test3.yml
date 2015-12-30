@@ -1,0 +1,20 @@
+---
+
+# Scenario: only host2 fails
+# Result: works as expected but never stops executing
+
+- hosts: all
+  become: true
+  tasks:
+    - debug: msg="start of test 3"
+
+    - fail: msg="failure message"
+      when: ansible_hostname == 'host2'
+
+    - debug: msg="first debug message"
+
+    - debug: msg="second debug message"
+
+    - include: includes/include1.yml
+
+    # - debug: msg="final debug message"

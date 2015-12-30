@@ -1,0 +1,47 @@
+$ ansible-playbook -i hosts test3.yml
+
+PLAY ***************************************************************************
+
+TASK [setup] *******************************************************************
+ok: [host2]
+ok: [host1]
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "start of test 3"
+}
+ok: [host2] => {
+    "msg": "start of test 3"
+}
+
+TASK [fail] ********************************************************************
+skipping: [host1]
+fatal: [host2]: FAILED! => {"changed": false, "failed": true, "msg": "failure message"}
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "first debug message"
+}
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "second debug message"
+}
+
+TASK [include] *****************************************************************
+included: /Users/rkalff/Projects/TestAnsible/test/includes/include1.yml for host1
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "include 1"
+}
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "final debug message"
+}
+
+^C # <<<< HAVE TO KILL PROCESS HERE
+PLAY RECAP *********************************************************************
+host1                      : ok=7    changed=0    unreachable=0    failed=0
+host2                      : ok=2    changed=0    unreachable=0    failed=1

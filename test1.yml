@@ -1,0 +1,20 @@
+---
+
+# Scenario: no failures
+# Result: works as expected
+
+- hosts: all
+  become: true
+  tasks:
+    - debug: msg="start of test 1"
+
+    - fail: msg="failure message"
+      when: false
+
+    - debug: msg="first debug message"
+
+    - debug: msg="second debug message"
+
+    - include: includes/include1.yml
+
+    - debug: msg="final debug message"

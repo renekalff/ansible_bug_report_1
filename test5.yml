@@ -1,0 +1,23 @@
+---
+
+# Scenario: only host2 fails, but now in included task file
+#           include statement present after induced failure
+# Result: host1 continue's after host2 fails as expected, but:
+#         - host2 start executing from failure point on last task for host1
+#         - on host2 execution start two different tasks are tunning in parallel
+#         - host2 keeps executing till the end of the playbook
+
+- hosts: all
+  become: true
+  tasks:
+    - debug: msg="start of test 4"
+
+    - include: includes/include2.yml
+
+    - debug: msg="first debug message"
+
+    - debug: msg="second debug message"
+
+    - include: includes/include1.yml
+
+    - debug: msg="final debug message"

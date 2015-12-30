@@ -1,0 +1,23 @@
+$ ansible-playbook -i hosts test2.yml
+
+PLAY ***************************************************************************
+
+TASK [setup] *******************************************************************
+ok: [host2]
+ok: [host1]
+
+TASK [debug] *******************************************************************
+ok: [host1] => {
+    "msg": "start of test 2"
+}
+ok: [host2] => {
+    "msg": "start of test 2"
+}
+
+TASK [fail] ********************************************************************
+fatal: [host1]: FAILED! => {"changed": false, "failed": true, "msg": "failure message"}
+fatal: [host2]: FAILED! => {"changed": false, "failed": true, "msg": "failure message"}
+
+PLAY RECAP *********************************************************************
+host1                      : ok=2    changed=0    unreachable=0    failed=1
+host2                      : ok=2    changed=0    unreachable=0    failed=1

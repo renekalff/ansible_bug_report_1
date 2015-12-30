@@ -1,0 +1,20 @@
+---
+
+# Scenario: only host2 fails, but now in included task file
+#           no include statements present after induced failure
+# Result: works as expected
+
+- hosts: all
+  become: true
+  tasks:
+    - debug: msg="start of test 4"
+
+    - include: includes/include2.yml
+
+    - debug: msg="first debug message"
+
+    - debug: msg="second debug message"
+
+    # - include: includes/include1.yml
+
+    - debug: msg="final debug message"
